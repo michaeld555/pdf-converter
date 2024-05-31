@@ -1,0 +1,25 @@
+{
+    "name": "michaeld555/pdf-converter",
+    "description": "A simple file conversion manager to pdf format",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "keywords": [
+        "laravel",
+        "word",
+        "pdf"
+    ],
+    "authors": [
+        {
+            "name": "Michael Douglas",
+            "email": "usermich999@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Michaeld555\\SecureShell\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.0"
+    }
+}
