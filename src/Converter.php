@@ -13,7 +13,9 @@ class Converter {
     public static function parse(?string $file, ?string $output)
     {
 
-        $py = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ? __DIR__.'/python/win/python.exe' : __DIR__.'/python/linux/python3';
+        $isWin = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+
+        $py = ($isWin) ? __DIR__.'/python/win/python.exe' : __DIR__.'/python/linux/python3';
 
         $converter = __DIR__.'/converter.py';
 
@@ -21,7 +23,17 @@ class Converter {
 
         $output = $output;
 
-        $command = escapeshellcmd("$py $converter $file $output");
+        $pyPath = __DIR__ . '/python/linux/';
+
+        if ($isWin) {
+
+            $command = escapeshellcmd("$py $converter $file $output");
+
+        } else {
+
+            $command = escapeshellcmd("PYTHONPATH=$pyPath $py $converter $file $output");
+
+        }
 
         $output = shell_exec($command);
 
