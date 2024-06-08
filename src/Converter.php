@@ -15,7 +15,7 @@ class Converter {
 
         $isWin = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
 
-        $py = ($isWin) ? __DIR__.'/python/win/python.exe' : __DIR__.'/python/linux/python3';
+        $py = __DIR__.'/python/win/python.exe';
 
         $converter = __DIR__.'/converter.py';
 
@@ -23,15 +23,13 @@ class Converter {
 
         $output = $output;
 
-        $pyPath = __DIR__ . '/python/linux/';
-
         if ($isWin) {
 
             $command = escapeshellcmd("$py $converter $file $output");
 
         } else {
 
-            $command = escapeshellcmd("PYTHONPATH=$pyPath $py $converter $file $output");
+            $command = escapeshellcmd("libreoffice --headless --convert-to pdf --outdir $output $file");
 
         }
 
