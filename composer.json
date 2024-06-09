@@ -1,13 +1,15 @@
 {
     "name": "michaeld555/pdf-converter",
-    "description": "A simple file conversion manager to pdf format",
+    "description": "A simple manager conversion for docx files to pdf",
     "type": "library",
-    "license": "GPL-3.0-or-later",
+    "license": "MIT",
     "keywords": [
-        "laravel",
+        "php",
         "word",
-        "pdf"
+        "pdf",
+        "convert"
     ],
+    "homepage": "https://github.com/michaeld555/pdf-converter",
     "authors": [
         {
             "name": "Michael Douglas",
@@ -16,10 +18,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Michaeld555\\SecureShell\\": "src/"
+            "Michaeld555\\PdfConverter\\": "src/"
         }
     },
     "require": {
         "php": ">=8.0"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

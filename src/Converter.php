@@ -1,41 +1,25 @@
 <?php
 
-namespace Michaeld555\SecureShell;
+namespace Michaeld555\PdfConverter;
 
-class Converter {
+use Michaeld555\PdfConverter\Providers\ConverterProvider;
+
+class Converter extends ConverterProvider {
 
     /**
      * Convert the input file to pdf and save in the output path
      *
      * @param string $file Path of the input file
-     * @param string $encoding Path of the output file
+     * @param string $output Path of the output file
      */
     public static function parse(?string $file, ?string $output)
     {
 
-        $isWin = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+        $command = self::converter_command($file, $output);
 
-        $py = __DIR__.'/python/win/python.exe';
+        $result = self::execute_command($command);
 
-        $converter = __DIR__.'/converter.py';
-
-        $file = $file;
-
-        $output = $output;
-
-        if ($isWin) {
-
-            $command = escapeshellcmd("$py $converter $file $output");
-
-        } else {
-
-            $command = escapeshellcmd("libreoffice --headless --convert-to pdf --outdir $output $file");
-
-        }
-
-        $output = shell_exec($command);
-
-        print($output);
+        //print($result); // for log test only
 
     }
 
