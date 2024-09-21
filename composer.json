@@ -1,0 +1,30 @@
+{
+    "name": "michaeld555/pdf-converter",
+    "description": "A simple manager conversion for docx files to pdf",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "word",
+        "pdf",
+        "convert"
+    ],
+    "homepage": "https://github.com/michaeld555/pdf-converter",
+    "authors": [
+        {
+            "name": "Michael Douglas",
+            "email": "usermich999@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Michaeld555\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "setasign/fpdi-tcpdf": "^2.3"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
