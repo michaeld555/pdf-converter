@@ -8,12 +8,12 @@ Require this package in your composer.json and update composer. This will downlo
   
 ## Usage
 
-You can create a new Converter instance and pass the docx file path and pdf file path. This will convert and save the pdf file in the path passed.
+You can create a new Converter instance and pass the docx file url and pdf file path. This will convert and save the pdf file in the path passed.
 
 ```php
     use PdfConverter\Converter;
 
-    Converter::docx_to_pdf('path_to_file/file.docx', 'path_to_file/');
+    Converter::docx_to_pdf('https://example.com/file.docx', 'path_to_file/');
 
     
     if (file_exists('path_to_file/file.pdf')) {

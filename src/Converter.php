@@ -29,11 +29,14 @@ class Converter {
 
         for ($paginaId = 1; $paginaId <= $paginaCount; $paginaId++) {
 
-            $pdf->AddPage('', '', true);
+            $pdf->setPrintHeader(false);
+            $pdf->setPrintFooter(false);
+
+            $pdf->AddPage('P');
 
             $templateId = $pdf->importPage($paginaId);
 
-            $pdf->useTemplate($templateId, 0, 0, 210, 297, true);
+            $pdf->useTemplate($templateId);
 
         }
 
