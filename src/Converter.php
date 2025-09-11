@@ -32,9 +32,13 @@ class Converter {
             $pdf->setPrintHeader(false);
             $pdf->setPrintFooter(false);
 
-            $pdf->AddPage('P');
-
             $templateId = $pdf->importPage($paginaId);
+
+            $size = $pdf->getTemplateSize($templateId);
+
+            $orientation = ($size['width'] > $size['height']) ? 'L' : 'P';
+
+            $pdf->AddPage($orientation, [$size['width'], $size['height']]);
 
             $pdf->useTemplate($templateId);
 
