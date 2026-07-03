@@ -1,1 +1,11 @@
-vendor/*
+/vendor/
+
+/.php-cs-fixer.cache
+/.phpunit.cache/
+/.phpstan.cache/
+/coverage/
+
+/.idea/
+/.vscode/
+.DS_Store
+Thumbs.db

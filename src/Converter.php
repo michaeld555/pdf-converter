@@ -1,54 +1,26 @@
 <?php
 
-namespace Michaeld555;
+declare(strict_types=1);
 
-use setasign\Fpdi\Tcpdf\Fpdi;
+namespace Michaeld555\PdfConverter;
 
-class Converter {
+use Michaeld555\PdfConverter\Contract\DocumentConverter;
+use Michaeld555\PdfConverter\Driver\LibreOfficeConverter;
 
-    /**
-     * Convert the input file to pdf and save in the output path
-     *
-     * @param string $file Path of the input file
-     * @param string $output Path of the output file
-     */
-    public static function docx_to_pdf(?string $file, ?string $output)
+/**
+ * Public facade for document conversion.
+ */
+final class Converter implements DocumentConverter
+{
+    private readonly DocumentConverter $driver;
+
+    public function __construct(?DocumentConverter $driver = null)
     {
-
-        $urlPdf = 'https://br2-word-view.officeapps.live.com/wv/WordViewer/document.pdf?WOPIsrc=http://br2-view-wopi.wopi.online.office.net:808/oh/wopi/files/@/wFileId?wFileId=' . $file . '&access_token=1&access_token_ttl=0&type=printpdf';
-
-        $pdfContent = file_get_contents($urlPdf);
-
-        $tempFilePath = tempnam(sys_get_temp_dir(), 'pdf');
-
-        file_put_contents($tempFilePath, $pdfContent);
-
-        $pdf = new FPDI();
-
-        $paginaCount = $pdf->setSourceFile($tempFilePath);
-
-        for ($paginaId = 1; $paginaId <= $paginaCount; $paginaId++) {
-
-            $pdf->setPrintHeader(false);
-            $pdf->setPrintFooter(false);
-
-            $templateId = $pdf->importPage($paginaId);
-
-            $size = $pdf->getTemplateSize($templateId);
-
-            $orientation = ($size['width'] > $size['height']) ? 'L' : 'P';
-
-            $pdf->AddPage($orientation, [$size['width'], $size['height']]);
-
-            $pdf->useTemplate($templateId);
-
-        }
-
-        $pdf->Output($output, 'F');
-
-        unlink($tempFilePath);
-
+        $this->driver = $driver ?? new LibreOfficeConverter();
     }
 
-
+    public function convert(string $source, string $destination): void
+    {
+        $this->driver->convert($source, $destination);
+    }
 }

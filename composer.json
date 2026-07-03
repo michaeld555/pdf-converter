@@ -1,13 +1,15 @@
 {
     "name": "michaeld555/pdf-converter",
-    "description": "A simple manager conversion for docx files to pdf",
+    "description": "Reliable DOCX to PDF conversion using a local LibreOffice process",
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "php",
-        "word",
+        "converter",
+        "docx",
+        "libreoffice",
         "pdf",
-        "convert"
+        "php",
+        "word"
     ],
     "homepage": "https://github.com/michaeld555/pdf-converter",
     "authors": [
@@ -16,15 +18,54 @@
             "email": "usermich999@gmail.com"
         }
     ],
+    "require": {
+        "php": "^8.2",
+        "symfony/process": "^7.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^11.5"
+    },
     "autoload": {
         "psr-4": {
-            "Michaeld555\\": "src/"
+            "Michaeld555\\PdfConverter\\": "src/",
+            "Michaeld555\\": "src/Legacy/"
         }
     },
-    "require": {
-        "php": ">=8.0",
-        "setasign/fpdi-tcpdf": "^2.3"
+    "autoload-dev": {
+        "psr-4": {
+            "Michaeld555\\PdfConverter\\Tests\\": "tests/"
+        }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "scripts": {
+        "analyse": "phpstan analyse --memory-limit=512M",
+        "check": [
+            "@qa:validate",
+            "@test",
+            "@analyse",
+            "@cs:check",
+            "@security:audit"
+        ],
+        "cs:check": "php-cs-fixer check --diff --verbose",
+        "cs:fix": "php-cs-fixer fix --verbose",
+        "qa:validate": "composer validate --strict",
+        "security:audit": "composer audit",
+        "test": "phpunit",
+        "test:integration": "phpunit --testsuite integration",
+        "test:unit": "phpunit --testsuite unit"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
+        },
+        "platform": {
+            "php": "8.2.0"
+        },
+        "sort-packages": true
+    },
+    "support": {
+        "issues": "https://github.com/michaeld555/pdf-converter/issues",
+        "source": "https://github.com/michaeld555/pdf-converter"
+    }
 }
